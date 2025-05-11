@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Healthy Eating Plate</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f9f9f9; }
+    header { background-color: #4CAF50; color: white; padding: 20px; text-align: center; }
+    nav { background-color: #388E3C; display: flex; justify-content: center; }
+    nav a { color: white; padding: 14px 20px; text-decoration: none; display: inline-block; }
+    nav a:hover { background-color: #2E7D32; }
+    section { padding: 20px; }
+    .interactive { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    label, input, select { display: block; margin: 10px 0; }
+    .result { font-weight: bold; color: #4CAF50; }
+    footer { background-color: #4CAF50; color: white; text-align: center; padding: 10px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>The Healthy Eating Plate</h1>
+    <p>Inspired by Mexico's "Plato del Bien Comer"</p>
+  </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#diet">Create Your Diet</a>
+  </nav>
+
+  <section id="about">
+    <h2>About the Healthy Eating Plate</h2>
+    <p>The "Plato del Bien Comer" was created in Mexico as a guide to promote healthy eating habits. It categorizes food into three main groups: fruits & vegetables, cereals, and legumes & animal products. It's widely used in schools and health institutions.</p>
+  </section>
+
+  <section id="quiz">
+    <h2>Quick Food Quiz</h2>
+    <p>What group do carrots belong to?</p>
+    <button onclick="alert('Correct! Carrots are vegetables.')">Vegetables</button>
+    <button onclick="alert('Try again!')">Cereals</button>
+    <button onclick="alert('Try again!')">Proteins</button>
+  </section>
+
+  <section id="diet" class="interactive">
+    <h2>Create Your Healthy Diet</h2>
+    <label for="weight">Weight (kg):</label>
+    <input type="number" id="weight">
+
+    <label for="height">Height (cm):</label>
+    <input type="number" id="height">
+
+    <label for="activity">Activity Level:</label>
+    <select id="activity">
+      <option value="1.2">Sedentary</option>
+      <option value="1.375">Light</option>
+      <option value="1.55">Moderate</option>
+      <option value="1.725">Active</option>
+    </select>
+
+    <button onclick="calculateDiet()">Generate Diet</button>
+    <p class="result" id="dietResult"></p>
+  </section>
+
+  <footer>
+    <p>Created for educational purposes | Share with friends!</p>
+  </footer>
+
+  <script>
+    function calculateDiet() {
+      const weight = parseFloat(document.getElementById('weight').value);
+      const height = parseFloat(document.getElementById('height').value);
+      const activity = parseFloat(document.getElementById('activity').value);
+
+      if (isNaN(weight) || isNaN(height)) {
+        document.getElementById('dietResult').innerText = 'Please enter valid numbers.';
+        return;
+      }
+
+      const bmi = weight / ((height / 100) ** 2);
+      const calories = weight * activity * 24;
+
+      document.getElementById('dietResult').innerText =
+        `Your estimated BMI is ${bmi.toFixed(1)}. You need around ${Math.round(calories)} calories/day. Eat a balance of fruits, vegetables, cereals, and proteins!`;
+    }
+  </script>
+</body>
+</html>
